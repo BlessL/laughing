@@ -1,4 +1,4 @@
-package com.lin.baseTest;
+package com.lyj.baseTest;
 
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

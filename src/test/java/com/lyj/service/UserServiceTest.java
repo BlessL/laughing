@@ -1,11 +1,11 @@
-package com.lin.service;
+package com.lyj.service;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import com.lin.baseTest.SpringTestCase;
+import com.lyj.baseTest.SpringTestCase;
 import com.lyj.laughing.model.User;
 import com.lyj.laughing.service.UserService;
 
