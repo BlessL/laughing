@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyj.laughing.dao.ContentDao">
+ <!-- 字段备注信息:
+	id:主键，内容id
+	uid : 用户id
+	title : 标题
+	content : 内容
+	pic_url : 图片
+	laugh_value : 笑值
+	create_time : 创建时间
+	flag : 是否删除
+    -->
+    <resultMap id="queryContentResult" type="com.lyj.laughing.model.Content">
+        <result column="id" property="contentId" jdbcType="INTEGER" />
+        <result column="uid" property="userId" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="CHAR" />
+        <result column="content" property="content" jdbcType="CHAR" />
+        <result column="pic_url" property="picUrl" jdbcType="CHAR" />
+        <result column="laugh_value" property="laughValue" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="INTEGER" />
+    </resultMap>
+    
+    <!--获取 -->
+    <select id="getAllContent" parameterType="java.lang.Integer" resultMap="queryContentResult">
+    		SELECT
+    			id,
+    			uid,
+    			title,
+    			content,
+    			pic_url,
+    			laugh_value,
+    			create_time
+    		from 
+    			content
+    		where
+    			flag=0
+    </select>
+</mapper>
