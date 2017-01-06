@@ -5,25 +5,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lyj.laughing.model.User;
-import com.lyj.laughing.service.UserService;
+import com.lyj.laughing.model.Content;
+import com.lyj.laughing.service.ContentService;
 
 /**
  * 功能概要：UserController
  * 
  */
 @Controller
-public class UserController
+public class ContentController
 {
+
 	@Autowired
-	private UserService userService;
+	private ContentService contentService;
 
 	@RequestMapping("/")
 	public ModelAndView getIndex()
 	{
 		ModelAndView mav = new ModelAndView("index");
-		User user = userService.selectUserById(1);
-		mav.addObject("user", user);
+		Content content = contentService.getAllContent();
+		mav.addObject("content", content);
 		return mav;
 	}
 }
