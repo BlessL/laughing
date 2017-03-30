@@ -18,4 +18,11 @@
    <!-- 对模型视图添加前后缀 -->
      <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
       p:prefix="/WEB-INF/view/" p:suffix=".jsp"/>
+      
+     <mvc:annotation-driven/>
+     <mvc:resources mapping="/lib/**" location="/lib/"/>
+     <mvc:resources mapping="/stylesheets/**" location="/stylesheets/" />
+     <mvc:resources mapping="/images/**" location="/images/" />
+      
+
 </beans>

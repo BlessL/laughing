@@ -3,8 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.lyj</groupId>
 	<artifactId>laughing</artifactId>
+	<name>laughing</name>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<url>http://maven.apache.org</url>
+	
 	<properties>
 		<!-- spring版本号 -->
 		<spring.version>3.2.8.RELEASE</spring.version>
@@ -137,5 +140,9 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+	
+	<build>
+    	<finalName>laughing</finalName>
+  	</build>
 
 </project>

@@ -1,8 +1,10 @@
 package com.lyj.laughing.service;
 
+import java.util.List;
+
 import com.lyj.laughing.model.Content;
 
 public interface ContentService
 {
-	Content getAllContent();
+	List<Content> getAllContent();
 }
