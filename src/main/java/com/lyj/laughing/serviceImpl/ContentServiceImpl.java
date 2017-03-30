@@ -1,5 +1,7 @@
 package com.lyj.laughing.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ public class ContentServiceImpl implements ContentService
 	ContentDao contentDao;
 
 	@Override
-	public Content getAllContent()
+	public List<Content> getAllContent()
 	{
 		return contentDao.getAllContent();
 	}

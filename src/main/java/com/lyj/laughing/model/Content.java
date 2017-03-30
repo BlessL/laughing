@@ -2,7 +2,6 @@ package com.lyj.laughing.model;
 
 public class Content
 {
-
 	/** 内容id */
 	private Integer contentId;
 	/** 发送内容的用户id */
