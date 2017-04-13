@@ -114,6 +114,8 @@
 	            <li ><a href="/laughing/allContents?pageIndex=1&pageSize=3"><span class="fa fa-caret-right"></span> 全部笑话</a></li>
 	    	</ul>
 	    </li>
+
+
     </ul>
     </div>
 
@@ -125,16 +127,66 @@
     		<button class="btn btn-primary" onclick="window.location.href='/laughing/addContent'"><i class="fa fa-plus"></i>  我也要讲个笑话</button>
 		</div>
         <div class="main-content">
-       
-		<c:forEach items = "${contentList}" var = "contentList">
-		    <div class="panel panel-default">
-		        <a href="#page-stats${contentList.contentId}" class="panel-heading" data-toggle="collapse">${contentList.title}</a>
-		        <div id="page-stats${contentList.contentId}" class="panel-collapse panel-body collapse in">
-					<h1>${contentList.content}</h1>
-		        </div>
-		 	<p class="stat" align = "right"><span class="label label-info">${contentList.laughValue}</span></p>
-		    </div>
-		</c:forEach>
+		
+	  <table class="table table-striped table-bordered table-hover">
+			  <th>标题</th>
+			  <th>内容</th>
+			  <th>笑值</th>
+			  <th>时间</th>
+			<c:forEach var="list" items="${paginationData.currData}">
+				<tr>
+					<td>${list.title}</td>
+					<td>${list.content}</td>
+					<td>${list.laughValue}</td>
+					<td>${list.createTime}</td>
+				</tr>
+			</c:forEach>
+	  </table>
+	  
+	  <center>
+		  <nav>
+		  <ul class="pagination">
+		  <c:if test="${paginationData.isFirst() }">
+			   <li class="disabled">
+				  <a href="#" aria-label="Previous">
+					<span aria-hidden="true"><<上一页</span>
+				  </a>
+				</li>
+			</c:if>
+			<c:if test="${not paginationData.isFirst() }">
+				<li>
+				  <a href="/laughing/allContents?pageIndex=${paginationData.previousIndex }&pageSize=${paginationData.pageSize}" aria-label="Previous">
+					<span aria-hidden="true"><<上一页</span>
+				  </a>
+				</li>
+			</c:if>
+			<c:if test="${paginationData.pageLinkNumber gt 0}">
+				<c:forEach var="linkIndex" begin="${paginationData.beginIndex}" end="${paginationData.endIndex}">
+					<c:if test="${linkIndex eq  paginationData.pageIndex}" var="isCurr">
+						<li class="active"><a href="#">${linkIndex}</a></li>
+					</c:if>
+					<c:if test="${not isCurr}">
+						<li><a href="/laughing/allContents?pageIndex=${linkIndex}&pageSize=${paginationData.pageSize}" >${linkIndex}</a></li>
+					</c:if>
+				</c:forEach>
+			</c:if>
+			<c:if test="${paginationData.isLast() }">
+			   <li class="disabled">
+				  <a href="#" aria-label="Next">
+					<span aria-hidden="true">下一页>></span>
+				  </a>
+				</li>
+			</c:if>
+			<c:if test="${not paginationData.isLast()}">
+				<li>
+				  <a href="/laughing/allContents?pageIndex=${paginationData.getNextIndex()}&pageSize=${paginationData.pageSize}" aria-label="Next">
+					<span aria-hidden="true">下一页>> </span>
+				  </a>
+				</li>
+			</c:if>
+		  </ul>
+		</nav>
+	  </center>
     
         <footer>
 	        <div class="stats">

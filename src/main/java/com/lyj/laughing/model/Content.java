@@ -1,5 +1,7 @@
 package com.lyj.laughing.model;
 
+import java.util.Date;
+
 public class Content
 {
 	/** 内容id */
@@ -15,7 +17,7 @@ public class Content
 	/** 赞值 */
 	private Integer laughValue;
 	/** 创建时间 */
-	private int createTime;
+	private String createTime;
 
 	public Integer getContentId()
 	{
@@ -77,12 +79,12 @@ public class Content
 		this.laughValue = laughValue;
 	}
 
-	public int getCreateTime()
+	public String getCreateTime()
 	{
 		return createTime;
 	}
 
-	public void setCreateTime(int createTime)
+	public void setCreateTime(String createTime)
 	{
 		this.createTime = createTime;
 	}
