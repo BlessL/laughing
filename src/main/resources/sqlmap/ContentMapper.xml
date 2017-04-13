@@ -18,9 +18,36 @@
         <result column="content" property="content" jdbcType="CHAR" />
         <result column="pic_url" property="picUrl" jdbcType="CHAR" />
         <result column="laugh_value" property="laughValue" jdbcType="INTEGER" />
-        <result column="create_time" property="createTime" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="CHAR" />
     </resultMap>
     
+    <sql id="select_all">
+    	select id,uid,title,content,pic_url,laugh_value,create_time
+    </sql>
+    
+     <!--获取 最好的5条内容-->
+    <select id="getTop5Content" parameterType="java.lang.Integer" resultMap="queryContentResult">
+    		<include refid="select_all"/>
+    		from 
+    			content
+    		where
+    			flag=0
+    		order by
+    			laugh_value desc
+    		limit 0,5
+    </select>
+    
+    <!-- 分页查询 -->
+    <select id="getContentByPage" parameterType="java.lang.Integer" resultMap="queryContentResult">
+    	<include refid="select_all"/>
+    		from 
+    			content
+    		where
+    			flag=0
+    		order by
+    			create_time desc
+    		limit #{start},#{pageSize}
+    </select>
     <!--获取 -->
     <select id="getAllContent" parameterType="java.lang.Integer" resultMap="queryContentResult">
     		SELECT
@@ -36,4 +63,30 @@
     		where
     			flag=0
     </select>
+    
+    <select id="getContentTotalNum" resultType="java.lang.Integer">
+    	select 
+    		count(1)
+    	from 
+    		content
+    	where
+    		flag=0
+    </select>
+    
+    
+    <sql id="contentSet">
+    	<set>
+    		<if test="contentId != null">id=#{contentId,jdbcType=INTEGER},</if>
+    		<if test="userId != null">uid=#{userId,jdbcType=INTEGER},</if>
+    		<if test="title != null">title=#{title,jdbcType=VARCHAR},</if>
+    		<if test="content != null">content=#{content,jdbcType=VARCHAR},</if>
+    		<if test="picUrl != null">pic_url=#{picUrl,jdbcType=VARCHAR},</if>
+    		<if test="laughValue != null">laugh_value=#{laughValue,jdbcType=INTEGER},</if>
+    		create_time=NOW(),
+    		flag=0
+    	</set>
+    </sql>
+    <insert id="addContent" parameterType = "com.lyj.laughing.model.Content">
+    	INSERT INTO content <include refid="contentSet"/>
+    </insert>
 </mapper>
