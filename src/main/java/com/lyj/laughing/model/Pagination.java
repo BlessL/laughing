@@ -53,12 +53,10 @@ public class Pagination
 		if (pageSize < 1)
 		{
 			this.pageSize = 1;
-		}
-		else if (pageSize > totalElements)
+		} else if (pageSize > totalElements)
 		{
 			this.pageSize = totalElements;
-		}
-		else
+		} else
 		{
 			this.pageSize = pageSize;
 		}
@@ -87,12 +85,10 @@ public class Pagination
 		if (pageIndex < 1)
 		{
 			this.pageIndex = 1;
-		}
-		else if (pageIndex > totalPages)
+		} else if (pageIndex > totalPages)
 		{
 			this.pageIndex = totalPages;
-		}
-		else
+		} else
 		{
 			this.pageIndex = pageIndex;
 		}
@@ -118,12 +114,10 @@ public class Pagination
 		if (pageLinkNumber < 0)
 		{
 			this.pageLinkNumber = 0;
-		}
-		else if (pageLinkNumber > totalPages)
+		} else if (pageLinkNumber > totalPages)
 		{
 			this.pageLinkNumber = totalPages;
-		}
-		else
+		} else
 		{
 			this.pageLinkNumber = pageLinkNumber;
 		}
@@ -144,8 +138,8 @@ public class Pagination
 		}
 		if (endIndex > totalPages)
 		{
-			endIndex = totalPages;
 			beginIndex = endIndex - pageLinkNumber + 1;
+			endIndex = totalPages;
 		}
 	}
 
