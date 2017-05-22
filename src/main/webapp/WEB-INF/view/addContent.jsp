@@ -22,7 +22,6 @@
 
 </head>
 <body class=" theme-blue">
-
 	<form action = "addContent" method = "post">
 		<div class="form-group">
 			<label for="title">标题</label>
