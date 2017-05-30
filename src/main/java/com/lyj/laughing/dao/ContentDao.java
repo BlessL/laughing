@@ -16,4 +16,6 @@ public interface ContentDao
 	public Integer getContentTotalNum();
 
 	public void addContent(Content content);
+
+	public void addLike(Map<String, Object> paramMap);
 }

@@ -147,4 +147,19 @@ public class LaughingController
 		session.setAttribute("user", user);
 		return new ModelAndView("redirect:/index");
 	}
+
+	/**
+	 * @category 点赞
+	 * @param request
+	 */
+	@RequestMapping("/addLike")
+	public void addLike(HttpServletRequest request)
+	{
+		int contentId = Integer.valueOf(request.getParameter("contentId"));
+		if (contentId < 0)
+		{
+			return;
+		}
+		contentService.addLike(contentId);
+	}
 }

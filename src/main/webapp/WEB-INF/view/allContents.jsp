@@ -22,6 +22,28 @@
         $(function() {
             $(".knob").knob();
         });
+        
+        <%-- 点赞  --%>
+   		
+   		function like(id){
+   		 $.ajax({
+   			 url:"/laughing/addLike",
+   			 data:{contentId:id},
+   			 type:"post",
+   			 dataType:"json",  
+   			 success:function(data) {    
+   		        if(data.msg =="true" ){    
+   		            alert("修改成功！");    
+   		            window.location.reload();    
+   		        }else{    
+   		            view(data.msg);    
+   		        }    
+   		     },    
+   		     error : function() {   
+   		          $("#like"+id).text(parseInt($("#like"+id).html()) + 1);
+   		     }    
+   		 });
+   		}
     </script>
     
     <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
@@ -137,7 +159,9 @@
 				<tr>
 					<td>${list.title}</td>
 					<td>${list.content}</td>
-					<td>${list.laughValue}</td>
+					<td id="like${list.contentId}" value="${list.laughValue}" align="right">${list.laughValue}
+					&nbsp;&nbsp;   <img id="b${list.contentId}" src="images/xl.jpg" float="right" align="right" width="30" height="30" onclick="like(${list.contentId})"/></td>
+				    
 					<td>${list.createTime}</td>
 				</tr>
 			</c:forEach>
