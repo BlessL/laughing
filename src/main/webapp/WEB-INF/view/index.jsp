@@ -19,10 +19,32 @@
     <script src="lib/jquery-1.11.1.min.js" type="text/javascript"></script>
 
         <script src="lib/jQuery-Knob/js/jquery.knob.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function() {
-            $(".knob").knob();
-        });
+    		<script type="text/javascript">
+        		$(function() {
+           			 $(".knob").knob();
+        	});
+       		<%-- 点赞  --%>
+       		
+       		function like(id){
+       		 $.ajax({
+       			 url:"/laughing/addLike",
+       			 data:{contentId:id},
+       			 type:"post",
+       			 dataType:"json",  
+       			 success:function(data) {    
+       		        if(data.msg =="true" ){    
+       		            alert("修改成功！");    
+       		            window.location.reload();    
+       		        }else{    
+       		            view(data.msg);    
+       		        }    
+       		     },    
+       		     error : function() {   
+       		          $("#like"+id).text(parseInt($("#like"+id).html()) + 1);
+       		     }    
+       		 });
+       		}
+       		
     </script>
     
     <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
@@ -151,7 +173,9 @@
 		        <div id="page-stats${contentList.contentId}" class="panel-collapse panel-body collapse in">
 					<h2>${contentList.content}</h2>
 		        </div>
-		 	<p class="stat" align = "right"><span class="label label-info">${contentList.laughValue}</span></p>
+		        
+		        <div id="like${contentList.contentId}" value="${contentList.laughValue}" align="right">${contentList.laughValue}</div>
+				<img id="b${contentList.contentId}" src="images/xl.jpg" float="right" align="right" width="30" height="30" onclick="like(${contentList.contentId})"/>
 		    </div>
 		</c:forEach>
     

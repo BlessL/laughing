@@ -89,4 +89,8 @@
     <insert id="addContent" parameterType = "com.lyj.laughing.model.Content">
     	INSERT INTO content <include refid="contentSet"/>
     </insert>
+    
+    <update id = "addLike" parameterType = "java.lang.Integer">
+    	update content set laugh_value = laugh_value+1 where id = ${contentId}
+    </update>
 </mapper>

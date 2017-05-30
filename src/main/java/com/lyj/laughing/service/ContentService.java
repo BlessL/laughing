@@ -58,9 +58,20 @@ public class ContentService
 		return contentList;
 	}
 
+	/**
+	 * @category 获取内容总数
+	 * @return
+	 */
 	public Integer getContentTotalNum()
 	{
 		return contentDao.getContentTotalNum();
+	}
+
+	public void addLike(Integer contentId)
+	{
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("contentId", contentId);
+		contentDao.addLike(paramMap);
 	}
 
 }
