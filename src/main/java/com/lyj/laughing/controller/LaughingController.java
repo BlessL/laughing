@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lyj.laughing.model.Content;
@@ -17,6 +18,7 @@ import com.lyj.laughing.model.Pagination;
 import com.lyj.laughing.model.User;
 import com.lyj.laughing.service.ContentService;
 import com.lyj.laughing.service.UserService;
+import com.lyj.laughing.util.RedisUtil;
 
 /**
  * @category 内容显示
@@ -161,5 +163,23 @@ public class LaughingController
 			return;
 		}
 		contentService.addLike(contentId);
+	}
+
+	/**
+	 * @category pv 统计
+	 * @return
+	 */
+	@RequestMapping("/getPv")
+	@ResponseBody
+	public Integer getPv()
+	{
+		String pvKey = "pv@laughing";
+		Integer pv = (Integer) RedisUtil.getInstance().get(pvKey);
+		if (pv != null)
+		{
+			return pv;
+		}
+		RedisUtil.getInstance().set(pvKey, 678);
+		return null;
 	}
 }
