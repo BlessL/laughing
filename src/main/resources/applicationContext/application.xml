@@ -20,6 +20,17 @@
         </property>
     </bean>
     
+     <bean class="com.lyj.laughing.util.RedisUtil">
+		<property name="link" value="${redis.init.maxTotal}"/>
+		<property name="free" value="${redis.init.maxIdle}"/>
+		<property name="holed" value="${redis.init.maxWaitMillis}"/>
+		<property name="port" value="${redis.init.port}"/>
+		<property name="host" value="${redis.init.host}"/>
+		<property name="timeout" value="${redis.init.timeout}"/>
+		<property name="password" value="${redis.init.psw}"/>
+		<property name="DB" value="${redis.init.DB}"/>
+	</bean>
+    
     
 
 	<!-- 配置数据源 -->
