@@ -10,20 +10,19 @@ public class RedisKey
 	/** 分隔符 */
 	private static final String SEPARATOR = "_";
 
-	/** 用户发言间隔 key : too_short_to_wallup_id_aid_weimobid */
-	public static final String TOO_SHORT_TO_WALLUP = "too_short_to_wallup_";
+	/** pvuv : pv_uv_ */
+	public static final String pv_uv = "pv_uv_";
 
 	/**
-	 * @category 微信墙用户 redisKey
+	 * @category puvu redisKey
 	 */
-	public static String getTooShortToWallup(Integer id, Integer aid, String weimobId)
+	public static String getPvUvKey(String pageName)
 	{
-		if (null == id || null == aid || null == weimobId)
+		if (null == pageName)
 		{
 			throw new ParamException(ResultCode.KEY_IS_NOT_NULL);
 		}
-		return new StringBuffer(TOO_SHORT_TO_WALLUP).append(id).append(SEPARATOR).append(aid).append(SEPARATOR)
-				.append(weimobId).toString();
+		return new StringBuffer(pv_uv).append(pageName).toString();
 	}
 
 }

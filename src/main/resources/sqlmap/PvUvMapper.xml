@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyj.laughing.dao.PvUvDao">
+  <!--
+	  `id` : 主键
+	  `page_name` ： 页面名称
+	  `pv` 
+	  `uv` 
+  -->
+  
+   <resultMap id="queryPvUvResult" type="com.lyj.laughing.model.PvUv">
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="page_name" property="pageName" jdbcType="CHAR" />
+        <result column="pv" property="pv" jdbcType="INTEGER" />
+        <result column="uv" property="uv" jdbcType="INTEGER" />
+    </resultMap>
+    
+     <select id="getPvUv" parameterType="java.util.Map" resultMap="queryPvUvResult">
+    	select 
+    		id,page_name,pv,uv
+    	from 
+    		pvuv
+    	where
+    		flag= 0
+    	and
+    		page_name = #{pageName,jdbcType=VARCHAR}  
+    </select>
+    
+    <update id="incrPv" parameterType="java.util.Map">
+    	update	
+    		pvuv
+    	set
+    		pv = pv +1
+    	where
+    		flag=0
+    	and 
+    		page_name = #{pageName,jdbcType=VARCHAR}  
+    </update>
+</mapper>

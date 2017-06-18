@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.lyj.laughing.model.User" %>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -106,21 +107,27 @@
         <div class="navbar-collapse collapse" style="height: 1px;">
           <ul id="main-menu" class="nav navbar-nav navbar-right">
             <li class="dropdown hidden-xs">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user padding-right-small" style="position:relative;top: 3px;"></span> Jack Smith
+            
+		     <%
+		     	User user = (User)session.getAttribute("user");
+		        if(null != user)
+		        {
+		      %>
+		       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-user padding-right-small" style="position:relative;top: 3px;"></span> 
+                     <%= user.getNick() %>
                     <i class="fa fa-caret-down"></i>
                 </a>
-
-              <ul class="dropdown-menu">
-                <li><a href="./">My Account</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Admin Panel</li>
-                <li><a href="./">Users</a></li>
-                <li><a href="./">Security</a></li>
-                <li><a tabindex="-1" href="./">Payments</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="-1" href="sign-in.html">Logout</a></li>
-              </ul>
+              <%
+		        }
+		        else
+		        {
+		      %>
+		        	<li><a href="register">注册</a></li>
+		        	<li><a href="login">登录</a></li>
+		      <%
+		        }
+		      %>
             </li>
           </ul>
         </div>
