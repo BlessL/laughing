@@ -10,13 +10,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lyj.laughing.constant.RedisKey;
 import com.lyj.laughing.model.Content;
 import com.lyj.laughing.model.Pagination;
+import com.lyj.laughing.model.PvUv;
 import com.lyj.laughing.model.User;
 import com.lyj.laughing.service.ContentService;
+import com.lyj.laughing.service.PvUvService;
 import com.lyj.laughing.service.UserService;
 import com.lyj.laughing.util.RedisUtil;
 
@@ -31,17 +33,39 @@ public class LaughingController
 	private ContentService contentService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PvUvService pvUvService;
 
 	/**
 	 * @category 首页
 	 * @return
 	 */
-	@RequestMapping("/index")
+	@RequestMapping(
+	{ "/", "/index" })
 	public ModelAndView getIndex()
 	{
 		ModelAndView mav = new ModelAndView("index");
 		List<Content> contentList = contentService.getTop5Content();
+		String pvUvKey = RedisKey.getPvUvKey("index");
+		Integer pv = (Integer) RedisUtil.getInstance().get(pvUvKey);
+		// pv + 1
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("pageName", "index");
+		pvUvService.incrPv(paramMap);
+		if (null == pv)
+		{
+			System.out.println("redis 为空");
+			PvUv pvUv = pvUvService.getPvUv(paramMap);
+			pv = pvUv.getUv();
+			RedisUtil.getInstance().set(pvUvKey, pv);
+		} else
+		{
+			System.out.println("redis 不为空");
+			pv += 1;
+			RedisUtil.getInstance().set(pvUvKey, pv);
+		}
 		mav.addObject("contentList", contentList);
+		mav.addObject("pv", pv);
 		return mav;
 	}
 
@@ -165,21 +189,12 @@ public class LaughingController
 		contentService.addLike(contentId);
 	}
 
-	/**
-	 * @category pv 统计
-	 * @return
-	 */
-	@RequestMapping("/getPv")
-	@ResponseBody
-	public Integer getPv()
+	@RequestMapping("/getPvUv")
+	public void getPvuv()
 	{
-		String pvKey = "pv@laughing";
-		Integer pv = (Integer) RedisUtil.getInstance().get(pvKey);
-		if (pv != null)
-		{
-			return pv;
-		}
-		RedisUtil.getInstance().set(pvKey, 678);
-		return null;
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("pageName", "index");
+		PvUv pvUv = pvUvService.getPvUv(paramMap);
+		System.out.println(pvUv);
 	}
 }

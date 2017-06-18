@@ -128,18 +128,6 @@
 		      <%
 		        }
 		      %>
-            
-				<%--
-		              <ul class="dropdown-menu">
-		                <li><a href="./">My Account</a></li>
-		                <li class="divider"></li>
-		                <li class="dropdown-header">Admin Panel</li>
-		                <li><a href="./">Users</a></li>
-		                <li><a tabindex="-1" href="./">Payments</a></li>
-		                <li class="divider"></li>
-		                <li><a tabindex="-1" href="sign-in.html">Logout</a></li>
-		              </ul>
-				 --%>
             </li>
           </ul>
         </div>
@@ -181,7 +169,7 @@
     
         <footer>
 	        <div class="stats">
-				    <p class="stat">您是第 <span class="label label-danger"> 109888</span> 位访客</p>
+				    <p class="stat">您是第 <span class="label label-danger"> ${pv} </span> 位访客</p>
 			</div>
             <p align = "center">©2017
         </footer>
